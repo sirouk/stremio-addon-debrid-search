@@ -38,32 +38,16 @@ npx wrangler pages secret put SWAGGER_PASSWORD
 
 ## Step 3: Configure Your Project
 
-Update the `wrangler.toml` file if needed:
+The `wrangler.toml` file is already configured. You can update the project name if needed:
 
 ```toml
 name = "your-addon-name"  # Change this to your preferred name
 compatibility_date = "2024-01-15"
-pages_build_output_dir = "dist"
-
-[build]
-command = "npm run build"
-
-[functions]
-compatibility_flags = ["nodejs_compat"]
 ```
 
-## Step 4: Build the Project
+**Note:** Cloudflare Pages doesn't use build configuration in wrangler.toml - build settings are configured in the dashboard or via CLI flags.
 
-```bash
-pnpm run build
-```
-
-This command will:
-- Create a `dist` directory
-- Copy all necessary files for Cloudflare Pages
-- Set up the Functions structure
-
-## Step 5: Deploy to Cloudflare Pages
+## Step 4: Deploy to Cloudflare Pages
 
 ### Option A: Deploy using Wrangler CLI (Recommended)
 
@@ -72,7 +56,13 @@ This command will:
    npx wrangler login
    ```
 
-2. **Create and deploy your project:**
+2. **Build and deploy your project:**
+   ```bash
+   pnpm run build
+   npx wrangler pages deploy dist --project-name=stremio-addon-debrid-search
+   ```
+
+   Or use the npm script:
    ```bash
    pnpm run deploy
    ```
@@ -92,12 +82,13 @@ This command will:
    - Connect your GitHub repository
    - Configure build settings:
      - **Framework preset:** None
-     - **Build command:** `npm run build`
+     - **Build command:** `pnpm run build`
      - **Build output directory:** `dist`
+     - **Node.js version:** 18 or higher
 
 3. **Deploy:**
    - Click "Save and Deploy"
-   - Cloudflare will build and deploy your project
+   - Cloudflare will build and deploy your project automatically
 
 ## Step 6: Test Your Deployment
 
@@ -136,6 +127,12 @@ This command will:
 - 10ms CPU time limit per request (should be sufficient for this addon)
 
 ## Troubleshooting
+
+### Wrangler Configuration Errors
+If you see errors like "Configuration file for Pages projects does not support 'build'":
+- Make sure your `wrangler.toml` only contains `name` and `compatibility_date`
+- Don't include `[build]`, `[env_vars]`, or `[functions]` sections for Pages
+- These are configured through the Cloudflare dashboard or CLI flags
 
 ### Build Errors
 If you encounter build errors:
