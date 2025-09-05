@@ -6,6 +6,9 @@
 	"scripts": {
 		"start": "node server.js",
 		"dev": "nodemon server.js",
+		"build": "mkdir -p dist && cp -r lib dist/ && cp addon.js serverless.js package.json dist/ && cp -r functions dist/ && cp _routes.json dist/",
+		"preview": "wrangler pages dev dist --compatibility-date=2024-01-15",
+		"deploy": "wrangler pages deploy dist --project-name=stremio-addon-debrid-search",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "MrMonkey42",
@@ -39,7 +42,8 @@
 		"addons"
 	],
 	"devDependencies": {
-		"nodemon": "^3.1.7"
+		"nodemon": "^3.1.7",
+		"wrangler": "^3.78.10"
 	},
 	"engines": {
 		"node": "^18.x",

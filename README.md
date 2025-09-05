@@ -1,7 +1,7 @@
 ## Debrid Search Stremio Addon
 Stremio Addon to search downloads and torrents in your Debrid cloud
 
-Install - https://68d69db7dc40-debrid-search.baby-beamup.club/configure
+Install - https://yourdomain123.com/configure
 
 
 ## FAQs
