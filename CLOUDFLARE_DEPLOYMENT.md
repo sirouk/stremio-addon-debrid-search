@@ -128,11 +128,32 @@ compatibility_date = "2024-01-15"
 
 ## Troubleshooting
 
+### Node.js Compatibility Issues
+If you see errors about missing Node.js built-ins (fs, crypto, http, etc.):
+- The `wrangler.toml` includes the `nodejs_compat` compatibility flag to fix this
+- If you still get build errors, try the alternative deployment method below
+
+### Alternative: Direct Handler (If Express.js Issues Persist)
+If the main deployment fails due to Express.js compatibility issues:
+
+1. **Rename the handler file:**
+   ```bash
+   mv functions/[[route]].js functions/[[route]].js.backup
+   mv functions/direct-handler.js functions/[[route]].js
+   ```
+
+2. **Deploy as normal:**
+   ```bash
+   pnpm run build
+   pnpm run deploy
+   ```
+
+This alternative handler bypasses Express.js completely and implements the Stremio addon API directly in Cloudflare Workers.
+
 ### Wrangler Configuration Errors
-If you see errors like "Configuration file for Pages projects does not support 'build'":
-- Make sure your `wrangler.toml` only contains `name` and `compatibility_date`
-- Don't include `[build]`, `[env_vars]`, or `[functions]` sections for Pages
-- These are configured through the Cloudflare dashboard or CLI flags
+If you see errors about wrangler.toml configuration:
+- Make sure your `wrangler.toml` includes the `[functions]` section with `nodejs_compat`
+- The current setup should handle Node.js built-in modules correctly
 
 ### Build Errors
 If you encounter build errors:

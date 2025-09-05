@@ -1,7 +1,19 @@
 ## Debrid Search Stremio Addon
 Stremio Addon to search downloads and torrents in your Debrid cloud
 
-Install - https://yourdomain123.com/configure
+## 🚀 Available Deployments
+
+### **Cloudflare Pages (New & Recommended)**
+**Install:** https://x.stremio-addon-debrid-search.pages.dev/configure
+- ⚡ Ultra-fast global edge deployment
+- 🌍 280+ locations worldwide  
+- 🛡️ Built-in DDoS protection
+- 📈 Automatic scaling
+
+### **Beamup (Original)**  
+**Install:** https://68d69db7dc40-debrid-search.baby-beamup.club/configure
+- 🏠 Node.js runtime
+- 🔄 Legacy compatibility
 
 
 ## FAQs
